@@ -18,24 +18,24 @@ public class GridController : MonoBehaviour
     void ShuffleGrid()
     {
         System.Random rnd = new System.Random();
-        List<string> shuffledList = new List<string>();
         int randomIndex = 0;
+        string tempSyllable = "";
 
-        while(syllables.Count>0)
-        {
-            randomIndex = rnd.Next(0, syllables.Count);
-            shuffledList.Add(syllables[randomIndex]);
-            syllables.RemoveAt(randomIndex);
-
-        }
-        syllables = shuffledList;
+        for(int i=0; i<syllables.Count-1; i++)
+		{
+            randomIndex = rnd.Next(i+1, syllables.Count);
+            tempSyllable = syllables[i];
+            syllables[i] = syllables[randomIndex];
+            syllables[randomIndex] = tempSyllable;
+		}
     }
 
     void AddToGrid()
     {
         for (int i = 0; i < syllables.Count; i++)
-        {
-            gridSpots[i].text = syllables[i];
+        {  
+            gridSpots[i].text = syllables[i].ToUpper();
+
         }
     }
 
